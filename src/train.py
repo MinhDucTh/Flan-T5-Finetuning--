@@ -122,13 +122,12 @@ def tokenize_dataset(
         padding=False,  # DataCollator handles dynamic padding per batch
     )
 
-    with tokenizer.as_target_tokenizer():
-        labels = tokenizer(
-            targets,
-            max_length=max_target_length,
-            truncation=True,
-            padding=False,
-        )
+    labels = tokenizer(
+        text_target=targets,
+        max_length=max_target_length,
+        truncation=True,
+        padding=False,
+    )
 
     # Replace pad token id in labels with -100 to ignore during loss computation
     label_ids = []
